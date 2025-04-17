@@ -1,4 +1,4 @@
-use estudos_rust::parsers::program_parser::parse_program;
+use parser::parsers::program_parser::parse_program;
 
 fn main() {
     // let code = r#"{ var x = 0; while x <= 20 do if (x <= 10) then x := x + 1 else x := x + 2 }"#;

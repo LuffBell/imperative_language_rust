@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod basic_parsers_tests {
-    use estudos_rust::parsers::basic_parsers::{parse_identifier, ws};
+    use parser::parsers::basic_parsers::{parse_identifier, ws};
 
     #[test]
     fn test_ws() {

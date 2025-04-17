@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod concret_value_parsers_tests {
-    use estudos_rust::ast::{ConcreteValue, Value};
-    use estudos_rust::parsers::concret_value_parsers::{parse_bool, parse_int, parse_string};
+    use parser::ast::{ConcreteValue, Value};
+    use parser::parsers::concret_value_parsers::{parse_bool, parse_int, parse_string};
 
     #[test]
     fn test_parse_bool_true() {

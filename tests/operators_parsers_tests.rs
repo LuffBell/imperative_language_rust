@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod operators_parsers_tests {
-    use estudos_rust::ast::{BinaryOperator, UnaryOperator};
-    use estudos_rust::parsers::operators_parsers::{parse_binary_operator, parse_unary_operator};
+    use parser::ast::{BinaryOperator, UnaryOperator};
+    use parser::parsers::operators_parsers::{parse_binary_operator, parse_unary_operator};
 
     // Testes para parse_binary_operator
     #[test]

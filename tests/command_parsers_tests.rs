@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod command_parsers_tests {
-    use estudos_rust::ast::{BinaryOperator, Command, ConcreteValue, Expression, IOCommand, Value};
-    use estudos_rust::parsers::command_parsers::parse_command;
+    use parser::ast::{BinaryOperator, Command, ConcreteValue, Expression, IOCommand, Value};
+    use parser::parsers::command_parsers::parse_command;
 
     #[test]
     fn test_assignment() {

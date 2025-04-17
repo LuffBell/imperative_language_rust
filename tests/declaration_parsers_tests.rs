@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod declaration_parsers_tests {
-    use estudos_rust::ast::{ConcreteValue, Declaration, Expression, Value, Type, ProcedureParameter, IOCommand};
-    use estudos_rust::parsers::declaration_parsers::{ parse_declaration, parse_procedure_parameter, parse_procedure_parameters, parse_procedure_declaration };
+    use parser::ast::{ConcreteValue, Declaration, Expression, Value, Type, ProcedureParameter, IOCommand};
+    use parser::parsers::declaration_parsers::{ parse_declaration, parse_procedure_parameter, parse_procedure_parameters, parse_procedure_declaration };
     #[test]
     fn test_single_declaration() {
         let input = "var x = 42";
@@ -102,7 +102,7 @@ mod declaration_parsers_tests {
         assert_eq!(result, Ok(("", Declaration::Procedure(
             "my_procedure_name".to_string(),
             vec![ProcedureParameter { identifier: Expression::Identifier("my_var".to_string()), type_name: Type::Int }],
-            Box::new(estudos_rust::ast::Command::IO(IOCommand::Write(Box::new(Expression::Identifier("my_var".to_string())))))
+            Box::new(parser::ast::Command::IO(IOCommand::Write(Box::new(Expression::Identifier("my_var".to_string())))))
         ))));
     }
 }

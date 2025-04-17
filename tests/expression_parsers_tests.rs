@@ -1,8 +1,8 @@
 #[cfg(test)]
 mod expression_parsers_tests {
-    use estudos_rust::ast::{BinaryOperator, ConcreteValue, UnaryOperator};
-    use estudos_rust::ast::{Expression, Value};
-    use estudos_rust::parsers::expression_parsers::{
+    use parser::ast::{BinaryOperator, ConcreteValue, UnaryOperator};
+    use parser::ast::{Expression, Value};
+    use parser::parsers::expression_parsers::{
         parse_concrete_value, parse_expression, parse_expression_atomic, parse_unary_expression,
     };
 
@@ -96,9 +96,9 @@ mod expression_parsers_tests {
                 "",
                 Expression::UnaryExp(
                     UnaryOperator::Not,
-                    Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Bool(
-                        true
-                    ))))
+                    Box::new(Expression::ConcreteValue(ConcreteValue::Value(
+                        Value::Bool(true)
+                    )))
                 )
             ))
         );
@@ -191,9 +191,9 @@ mod expression_parsers_tests {
                 "",
                 Expression::UnaryExp(
                     UnaryOperator::Not,
-                    Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Bool(
-                        false
-                    ))))
+                    Box::new(Expression::ConcreteValue(ConcreteValue::Value(
+                        Value::Bool(false)
+                    )))
                 )
             ))
         );
@@ -211,7 +211,9 @@ mod expression_parsers_tests {
                     BinaryOperator::Equal,
                     Box::new(Expression::BinaryExp(
                         BinaryOperator::Add,
-                        Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Int(5)))),
+                        Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Int(
+                            5
+                        )))),
                         Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Int(
                             10
                         ))))

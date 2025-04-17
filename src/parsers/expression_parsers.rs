@@ -7,13 +7,13 @@ use nom::{
     IResult, Parser, branch::alt, bytes::complete::tag, combinator::map, sequence::delimited,
 };
 
-pub fn parse_concrect_value(input: &str) -> IResult<&str, Expression> {
+pub fn parse_concrete_value(input: &str) -> IResult<&str, Expression> {
     delimited(
         ws,
         alt((
-            map(parse_int, Expression::ConcretValue),
-            map(parse_bool, Expression::ConcretValue),
-            map(parse_string, Expression::ConcretValue),
+            map(parse_int, Expression::ConcreteValue),
+            map(parse_bool, Expression::ConcreteValue),
+            map(parse_string, Expression::ConcreteValue),
         )),
         ws,
     )
@@ -29,7 +29,7 @@ pub fn parse_expression_atomic(input: &str) -> IResult<&str, Expression> {
     delimited(
         ws,
         alt((
-            parse_concrect_value,
+            parse_concrete_value,
             map(parse_identifier, Expression::Identifier),
             parse_parenthesized,
         )),

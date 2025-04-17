@@ -1,20 +1,20 @@
 #[cfg(test)]
 mod expression_parsers_tests {
-    use estudos_rust::ast::{BinaryOperator, ConcretValue, UnaryOperator};
+    use estudos_rust::ast::{BinaryOperator, ConcreteValue, UnaryOperator};
     use estudos_rust::ast::{Expression, Value};
     use estudos_rust::parsers::expression_parsers::{
-        parse_concrect_value, parse_expression, parse_expression_atomic, parse_unary_expression,
+        parse_concrete_value, parse_expression, parse_expression_atomic, parse_unary_expression,
     };
 
     #[test]
     fn test_parse_concrete_int() {
         let input = "42";
-        let result = parse_concrect_value(input);
+        let result = parse_concrete_value(input);
         assert_eq!(
             result,
             Ok((
                 "",
-                Expression::ConcretValue(ConcretValue::Value(Value::Int(42)))
+                Expression::ConcreteValue(ConcreteValue::Value(Value::Int(42)))
             ))
         );
     }
@@ -22,12 +22,12 @@ mod expression_parsers_tests {
     #[test]
     fn test_parse_concrete_bool() {
         let input = "true";
-        let result = parse_concrect_value(input);
+        let result = parse_concrete_value(input);
         assert_eq!(
             result,
             Ok((
                 "",
-                Expression::ConcretValue(ConcretValue::Value(Value::Bool(true)))
+                Expression::ConcreteValue(ConcreteValue::Value(Value::Bool(true)))
             ))
         );
     }
@@ -35,12 +35,12 @@ mod expression_parsers_tests {
     #[test]
     fn test_parse_concrete_string() {
         let input = "\"hello\"";
-        let result = parse_concrect_value(input);
+        let result = parse_concrete_value(input);
         assert_eq!(
             result,
             Ok((
                 "",
-                Expression::ConcretValue(ConcretValue::Value(Value::Str("hello".to_string())))
+                Expression::ConcreteValue(ConcreteValue::Value(Value::Str("hello".to_string())))
             ))
         );
     }
@@ -63,7 +63,7 @@ mod expression_parsers_tests {
             result,
             Ok((
                 "",
-                Expression::ConcretValue(ConcretValue::Value(Value::Int(123)))
+                Expression::ConcreteValue(ConcreteValue::Value(Value::Int(123)))
             ))
         );
     }
@@ -78,7 +78,7 @@ mod expression_parsers_tests {
                 "",
                 Expression::UnaryExp(
                     UnaryOperator::Neg,
-                    Box::new(Expression::ConcretValue(ConcretValue::Value(Value::Int(
+                    Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Int(
                         15
                     ))))
                 )
@@ -96,7 +96,7 @@ mod expression_parsers_tests {
                 "",
                 Expression::UnaryExp(
                     UnaryOperator::Not,
-                    Box::new(Expression::ConcretValue(ConcretValue::Value(Value::Bool(
+                    Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Bool(
                         true
                     ))))
                 )
@@ -114,7 +114,7 @@ mod expression_parsers_tests {
                 "",
                 Expression::UnaryExp(
                     UnaryOperator::Length,
-                    Box::new(Expression::ConcretValue(ConcretValue::Value(Value::Str(
+                    Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Str(
                         "test".to_string()
                     ))))
                 )
@@ -132,10 +132,10 @@ mod expression_parsers_tests {
                 "",
                 Expression::BinaryExp(
                     BinaryOperator::Add,
-                    Box::new(Expression::ConcretValue(ConcretValue::Value(Value::Int(
+                    Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Int(
                         10
                     )))),
-                    Box::new(Expression::ConcretValue(ConcretValue::Value(Value::Int(
+                    Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Int(
                         20
                     ))))
                 )
@@ -153,10 +153,10 @@ mod expression_parsers_tests {
                 "",
                 Expression::BinaryExp(
                     BinaryOperator::Concat,
-                    Box::new(Expression::ConcretValue(ConcretValue::Value(Value::Str(
+                    Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Str(
                         "foo".to_string()
                     )))),
-                    Box::new(Expression::ConcretValue(ConcretValue::Value(Value::Str(
+                    Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Str(
                         "bar".to_string()
                     ))))
                 )
@@ -191,7 +191,7 @@ mod expression_parsers_tests {
                 "",
                 Expression::UnaryExp(
                     UnaryOperator::Not,
-                    Box::new(Expression::ConcretValue(ConcretValue::Value(Value::Bool(
+                    Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Bool(
                         false
                     ))))
                 )
@@ -211,12 +211,12 @@ mod expression_parsers_tests {
                     BinaryOperator::Equal,
                     Box::new(Expression::BinaryExp(
                         BinaryOperator::Add,
-                        Box::new(Expression::ConcretValue(ConcretValue::Value(Value::Int(5)))),
-                        Box::new(Expression::ConcretValue(ConcretValue::Value(Value::Int(
+                        Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Int(5)))),
+                        Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Int(
                             10
                         ))))
                     )),
-                    Box::new(Expression::ConcretValue(ConcretValue::Value(Value::Int(
+                    Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Int(
                         15
                     ))))
                 )

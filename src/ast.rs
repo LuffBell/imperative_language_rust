@@ -121,7 +121,7 @@ pub struct CallProcedure {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ProcedureParameter {
-    pub identifier: Expression,
+    pub identifier: String,
     pub r#type: Type,
 }
 

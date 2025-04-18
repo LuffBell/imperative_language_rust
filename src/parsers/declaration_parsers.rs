@@ -1,5 +1,5 @@
+use crate::ast::Declaration;
 use crate::ast::ProcedureParameter;
-use crate::ast::{Declaration, Expression};
 use crate::parsers::basic_parsers::{parse_identifier, parse_type, ws};
 use crate::parsers::command_parsers::parse_command;
 use crate::parsers::expression_parsers::parse_expression;
@@ -51,7 +51,7 @@ pub fn parse_procedure_parameter(input: &str) -> IResult<&str, ProcedureParamete
     map(
         (parse_type, tag(" "), parse_identifier),
         |(type_name, _, identifier_name)| ProcedureParameter {
-            identifier: Expression::Identifier(identifier_name.to_string()),
+            identifier: identifier_name.to_string(),
             r#type: type_name,
         },
     )

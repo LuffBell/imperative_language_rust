@@ -64,9 +64,10 @@ fn parse_assignment(input: &str) -> IResult<&str, Command> {
         (
             delimited(ws, parse_identifier, ws),
             delimited(ws, tag(":="), ws),
+            delimited(ws, opt(tag("move")), ws),
             delimited(ws, parse_expression, ws),
         ),
-        |(var, _, expr)| Command::Assignment(var, expr),
+        |(var, _, is_move, expr)| Command::Assignment(var, expr, is_move.is_some()),
     )
     .parse(input)
 }

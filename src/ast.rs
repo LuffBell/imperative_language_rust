@@ -7,7 +7,7 @@ pub enum Program {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Command {
     // Atribuição de valor
-    Assignment(String, Expression), // x := 5
+    Assignment(String, Expression, bool), // x := 5
     // Bloco de definições { x := x + 5 }
     DeclarationBlock(Vec<Declaration>, Box<Command>),
     // Expression (Condicional do Loop), Box<Command> (Corpo do Loop)
@@ -25,7 +25,7 @@ pub enum Command {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Declaration {
     // Definição de variável única
-    Variable(String, Expression), // var x = 5
+    Variable(String, Expression, bool), // var x = 5
     // Definição de variável separadas por virgula.
     Procedure(String, Vec<ProcedureParameter>, Box<Command>),
     Compound(Box<Declaration>, Box<Declaration>), // var x = 5; var y = 10;

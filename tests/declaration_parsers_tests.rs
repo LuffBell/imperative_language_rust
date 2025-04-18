@@ -17,7 +17,8 @@ mod declaration_parsers_tests {
                 "",
                 Declaration::Variable(
                     "x".to_string(),
-                    Expression::ConcreteValue(ConcreteValue::Value(Value::Int(42)))
+                    Expression::ConcreteValue(ConcreteValue::Value(Value::Int(42))),
+                    false
                 )
             ))
         );
@@ -34,11 +35,13 @@ mod declaration_parsers_tests {
                 Declaration::Compound(
                     Box::new(Declaration::Variable(
                         "a".to_string(),
-                        Expression::ConcreteValue(ConcreteValue::Value(Value::Int(5)))
+                        Expression::ConcreteValue(ConcreteValue::Value(Value::Int(5))),
+                        false
                     )),
                     Box::new(Declaration::Variable(
                         "b".to_string(),
-                        Expression::ConcreteValue(ConcreteValue::Value(Value::Int(10)))
+                        Expression::ConcreteValue(ConcreteValue::Value(Value::Int(10))),
+                        false
                     ))
                 )
             ))
@@ -168,6 +171,21 @@ mod declaration_parsers_tests {
                     ))))
                 )
             ))
+        );
+    }
+
+    #[test]
+    fn test_move_declaration() {
+        let input = "var z = move w";
+        let (rest, result) = parse_declaration(input).unwrap();
+        assert_eq!(rest, "");
+        assert_eq!(
+            result,
+            Declaration::Variable(
+                "z".to_string(),
+                Expression::Identifier("w".to_string()),
+                true
+            )
         );
     }
 }

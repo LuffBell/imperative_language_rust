@@ -35,9 +35,14 @@ fn parse_single_declaration(input: &str) -> IResult<&str, Declaration> {
             ws,
             tag("="),
             ws,
-            parse_expression,
+            alt((
+                map((tag("move"), ws, parse_expression), |(_, _, expr)| {
+                    (expr, true)
+                }),
+                map(parse_expression, |expr| (expr, false)),
+            )),
         ),
-        |(_, _, name, _, _, _, expr)| Declaration::Variable(name, expr),
+        |(_, _, name, _, _, _, (expr, is_move))| Declaration::Variable(name, expr, is_move),
     )
     .parse(input)
 }

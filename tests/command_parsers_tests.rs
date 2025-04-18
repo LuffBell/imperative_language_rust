@@ -12,11 +12,28 @@ mod command_parsers_tests {
                 "",
                 Command::Assignment(
                     "x".into(),
-                    Expression::ConcreteValue(ConcreteValue::Value(Value::Int(42)))
+                    Expression::ConcreteValue(ConcreteValue::Value(Value::Int(42))),
+                    false
                 )
             ))
         );
     }
+
+    #[test]
+    fn test_move_assignment() {
+        let input = "x := move y";
+        let (rest, result) = parse_command(input).unwrap();
+        assert_eq!(rest, "");
+        assert_eq!(
+            result,
+            Command::Assignment(
+                "x".to_string(),
+                Expression::Identifier("y".to_string()),
+                true
+            )
+        );
+    }
+
     #[test]
     fn test_assignment_complex() {
         let input = "x := x + 42";
@@ -32,7 +49,8 @@ mod command_parsers_tests {
                         Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Int(
                             42
                         ))))
-                    )
+                    ),
+                    false
                 )
             ))
         );
@@ -51,15 +69,20 @@ mod command_parsers_tests {
             Expression::BinaryExp(
                 BinaryOperator::Equal,
                 Box::new(Expression::Identifier("x".to_string())),
-                Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Int(0)))),
+                Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Int(
+                    0,
+                )))),
             ),
             Box::new(Command::Assignment(
                 "x".to_string(),
                 Expression::BinaryExp(
                     BinaryOperator::Add,
                     Box::new(Expression::Identifier("x".to_string())),
-                    Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Int(1)))),
+                    Box::new(Expression::ConcreteValue(ConcreteValue::Value(Value::Int(
+                        1,
+                    )))),
                 ),
+                false,
             )),
         );
         assert_eq!(parse_command(input), Ok(("", expected)));
@@ -73,10 +96,12 @@ mod command_parsers_tests {
             Box::new(Command::Assignment(
                 "y".into(),
                 Expression::ConcreteValue(ConcreteValue::Value(Value::Int(1))),
+                false,
             )),
             Box::new(Command::Assignment(
                 "z".into(),
                 Expression::ConcreteValue(ConcreteValue::Value(Value::Int(2))),
+                false,
             )),
         );
         assert_eq!(parse_command(input), Ok(("", expected)));
@@ -103,10 +128,12 @@ mod command_parsers_tests {
             Box::new(Command::Assignment(
                 "x".into(),
                 Expression::ConcreteValue(ConcreteValue::Value(Value::Int(5))),
+                false,
             )),
             Box::new(Command::Assignment(
                 "y".into(),
                 Expression::ConcreteValue(ConcreteValue::Value(Value::Int(10))),
+                false,
             )),
         );
         assert_eq!(parse_command(input), Ok(("", expected)));

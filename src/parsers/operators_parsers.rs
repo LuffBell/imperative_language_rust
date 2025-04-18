@@ -14,11 +14,13 @@ pub fn precedence(op: &BinaryOperator) -> u8 {
     match op {
         BinaryOperator::Concat => 5,
         BinaryOperator::Add | BinaryOperator::Sub => 3,
-        BinaryOperator::Equal => 2,
+        BinaryOperator::Equal
+        | BinaryOperator::Less
+        | BinaryOperator::LessEqual
+        | BinaryOperator::Greater
+        | BinaryOperator::GreaterEqual => 2,
         BinaryOperator::And => 1,
         BinaryOperator::Or => 0,
-        // TODO: Is this precedence weight correct?
-        BinaryOperator::Less | BinaryOperator::LessEqual | BinaryOperator::Greater | BinaryOperator::GreaterEqual => 2,
     }
 }
 

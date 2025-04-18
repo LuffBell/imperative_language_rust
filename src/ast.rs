@@ -18,7 +18,8 @@ pub enum Command {
     IO(IOCommand), // write(...) or read(...)
     // Sequência de comandos
     Sequence(Box<Command>, Box<Command>), // c1; c2
-    Skip,                                 // no operation
+    Skip,
+    CallProcedure(CallProcedure),
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -46,7 +47,7 @@ pub enum Expression {
     // BinaryOperator -> Tipo da expressão
     BinaryExp(BinaryOperator, Box<Expression>, Box<Expression>), // x + y, x - y, x == y
 
-    // ProcedureCall(String, Box<ExpressionList>)
+                                                                 // ProcedureCall(String, Box<ExpressionList>)
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -73,9 +74,9 @@ pub enum BinaryOperator {
     Concat, // ++
 
     // Menor, Maior que, Menor ou igual que, Maior ou igual que
-    Less, // <
-    LessEqual, // <=
-    Greater, // >
+    Less,         // <
+    LessEqual,    // <=
+    Greater,      // >
     GreaterEqual, // >=
 }
 
@@ -113,9 +114,15 @@ pub enum Value {
 // }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
+pub struct CallProcedure {
+    pub id: String,
+    pub args: Vec<Expression>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct ProcedureParameter {
     pub identifier: Expression,
-    pub type_name: Type,
+    pub r#type: Type,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
